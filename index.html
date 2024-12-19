@@ -49,8 +49,14 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        .item-name {
+        .item-link {
             font-size: 1.2rem;
+            color: #66ffff;
+            text-decoration: none;
+        }
+
+        .item-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -58,16 +64,32 @@
     <div class="container">
         <div class="header">IPA Browser</div>
         <ul class="list" id="ipa-list">
-            <li class="list-item">
-                <span class="item-name">Example IPA 1</span>
-            </li>
-            <li class="list-item">
-                <span class="item-name">Example IPA 2</span>
-            </li>
-            <li class="list-item">
-                <span class="item-name">Example IPA 3</span>
-            </li>
+            <!-- List items will be populated dynamically -->
         </ul>
     </div>
+
+    <script>
+        const links = [
+            { url: "https://google.com", name: "Google" },
+            { url: "https://apple.com", name: "Apple" },
+            { url: "https://github.com", name: "GitHub" }
+        ];
+
+        const ipaList = document.getElementById('ipa-list');
+
+        links.forEach(link => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-item';
+
+            const anchor = document.createElement('a');
+            anchor.href = link.url;
+            anchor.className = 'item-link';
+            anchor.textContent = link.name;
+            anchor.target = '_blank';
+
+            listItem.appendChild(anchor);
+            ipaList.appendChild(listItem);
+        });
+    </script>
 </body>
 </html>
