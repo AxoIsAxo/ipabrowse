@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPA Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.8), rgba(102, 153, 255, 0.8));
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .list-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+        }
+
+        .item-action {
+            font-size: 0.9rem;
+            color: #00ccff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .item-action:hover {
+            color: #66ffff;
+        }
+
+        .add-item {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .add-item input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .add-item button {
+            padding: 10px 20px;
+            background: #0066ff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-item button:hover {
+            background: #0052cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">IPA Browser</div>
+        <ul class="list" id="ipa-list">
+            <!-- Dynamically populated list items will go here -->
+        </ul>
+        <div class="add-item">
+            <input type="text" id="item-name" placeholder="Enter IPA name...">
+            <button onclick="addItem()">Add</button>
+        </div>
+    </div>
+
+    <script>
+        const ipaList = document.getElementById('ipa-list');
+
+        function addItem() {
+            const input = document.getElementById('item-name');
+            const itemName = input.value.trim();
+
+            if (itemName === '') {
+                alert('Please enter a valid IPA name.');
+                return;
+            }
+
+            const listItem = document.createElement('li');
+            listItem.className = 'list-item';
+
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'item-name';
+            nameSpan.textContent = itemName;
+
+            const actionSpan = document.createElement('span');
+            actionSpan.className = 'item-action';
+            actionSpan.textContent = 'Remove';
+            actionSpan.onclick = () => listItem.remove();
+
+            listItem.appendChild(nameSpan);
+            listItem.appendChild(actionSpan);
+
+            ipaList.appendChild(listItem);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
